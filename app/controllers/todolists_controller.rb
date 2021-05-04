@@ -11,7 +11,15 @@ class TodolistsController < ApplicationController
 
     list.save
 
-    redirect_to '/top'
+    redirect_to todolist_path(list.id)
+  end
+
+  def index
+    @lists = List.all
+  end
+
+  def show
+    @list = List.find(params[:id])
   end
 
   private
@@ -19,6 +27,6 @@ class TodolistsController < ApplicationController
   def list_params
 
     params.require(:list).permit(:title, :body)
-
+    
   end
 end
